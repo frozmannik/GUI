@@ -4,12 +4,12 @@ from tkinter.font import Font
 import os
 import json
 
+
 taskNumb = 0  # should be recieved from API
 
+
 file_name = 'projects.json'
-
 file_path = os.path.abspath(os.path.join('.json', file_name))
-
 with open(file_path) as f:
     jdata = json.load(f) # data of json file
 
@@ -17,10 +17,8 @@ with open(file_path) as f:
 
 
 class MCListDemo(ttk.Frame):
-    # class variable to track direction of column
-    # header sort
-    SortDir = True  # descending
 
+    SortDir = True  # descending
     def __init__(self, isapp=True, name='mclistdemo'):
         ttk.Frame.__init__(self, name=name)
         self.pack(expand=Y, fill=BOTH)
@@ -91,15 +89,12 @@ class MCListDemo(ttk.Frame):
     def _column_sort(self, col, descending=False):
 
         # grab values to sort as a list of tuples (column value, column id)
-        # e.g. [('Argentina', 'I001'), ('Australia', 'I002'), ('Brazil', 'I003')]
         data = [(self.tree.set(child, col), child) for child in self.tree.get_children('')]
 
-        # reorder data
-        # tkinter looks after moving other items in
-        # the same row
+
         data.sort(reverse=descending)
         for indx, item in enumerate(data):
-            self.tree.move(item[1], '', indx)  # item[1] = item Identifier
+            self.tree.move(item[1], '', indx)
 
         # reverse sort direction for next sort operation
         MCListDemo.SortDir = not descending
